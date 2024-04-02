@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ToolTrove</title>
+    <link rel="stylesheet" href="/Static/styles.css" />
+  </head>
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <a href="/"
+          ><img src="/Static/ToolTrove_Logo.png" alt="ToolTrove" width="60px"
+        /></a>
+      </div>
+      <div class="menu">
+        <a href="/" class="home">Home</a>
+        <div class="dropdown">
+          <button class="categories">Categories</button>
+          <div class="dropdowncontent">
+            <a href="/texttohandwriting">Text-to-Handwriting</a>
+            <a href="">Image Compressor</a>
+            <a href=""></a>
+          </div>
+        </div>
+        <a href="/about" class="about">About Us</a>
+      </div>
+      <div class="searchbar">
+        <input class="search" type="text" placeholder="Search..." />
+      </div>
+      <div class="buttons">
+        <a href="/login"><button class="login">Login</button></a>
+        <a href="/signup"><button class="signup">Sign Up</button></a>
+      </div>
+    </nav>
+
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %}
+    <!-- <ul class="flashes"> -->
+      {% for category, message in messages %}
+      <ul class="{{ category }}">{{ message | safe}}</ul>
+      {% endfor %}
+    <!-- </ul> -->
+    {% endif %} {% endwith %}
+
+  </header>
+  <body style="background-color: #f1ebeb">
+    <h1>Image Convertor</h1>
+    <form action="/imageconverterfunc" method="post" enctype="multipart/form-data">
+      <div class="fileinput">
+        <label for="myfile">Select a file</label>
+        <input type="file" id="myfile" name="file" />
+      </div>
+      <div class="slect">
+        <select name="operation" id="floatingselect">
+          <option selected>Choose</option>
+          <!-- <option value="cgray">Convert tp grayscale</option> -->
+          <option value="cpng">Convert to PNG</option>
+          <option value="cwebp">Convert to webp</option>
+          <option value="cjpg">Covert to jpg</option>
+          <option value="cpdf">Convert to pdf</option>
+        </select>
+        <label for="Floatingselect">select the prefer editing operation</label>
+      </div>
+      <button type="submit" class="submitbt">Submit</button>
+    </form>
+  </body>
+</html>
