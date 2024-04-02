@@ -1,3 +1,5 @@
+#Database testing, not connected to the official project, Ignore
+
 import mysql.connector
 
 mydb = mysql.connector.connect(
