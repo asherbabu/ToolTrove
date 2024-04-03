@@ -20,7 +20,7 @@ app.config['SECRET_KEY'] = "something complex"
 mydb = mysql.connector.connect(
     host = "localhost",
     user = "root",
-    passwd = "tiger",
+    passwd = "sivaganga",
     database = "ToolTrove"
 )
 
@@ -28,7 +28,7 @@ my_cursor = mydb.cursor()
 
 def allowed_file(filename):
     return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+        filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def enhancingImg(filename):
     input_img = f"Uploads/{filename}"
@@ -142,7 +142,7 @@ def texttohandwriting():
 
 @app.route('/imageconverter')
 def imageconverter():
-   return render_template("imageconverter.html")
+    return render_template("imageconverter.html")
 
 @app.route('/imageEnhancer')
 def imageEnhancer():
@@ -205,7 +205,7 @@ def imageconverterfunc():
     if request.method == "POST":
         operation = request.form.get("operation")
         #return "POST REQUEST IS HERE"
-     # check if the post request has the file part
+    # check if the post request has the file part
         if 'file' not in request.files:
             flash('No file part')
             return render_template("error.html")
@@ -228,7 +228,7 @@ def imageEnhancerfunc():
     if request.method == "POST":
         operation = request.form.get("operation")
         #return "POST REQUEST IS HERE"
-     # check if the post request has the file part
+    # check if the post request has the file part
         if 'file' not in request.files:
             flash('No file part')
             return render_template("error.html")
@@ -251,7 +251,7 @@ def imgToGrayscalefunc():
     if request.method == "POST":
         operation = request.form.get("operation")
         #return "POST REQUEST IS HERE"
-     # check if the post request has the file part
+    # check if the post request has the file part
         if 'file' not in request.files:
             flash('No file part')
             return render_template("error.html")
