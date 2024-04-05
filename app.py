@@ -20,7 +20,7 @@ app.config['SECRET_KEY'] = "something complex"
 mydb = mysql.connector.connect(
     host = "localhost",
     user = "root",
-    passwd = "sivaganga",
+    passwd = "tiger",
     database = "ToolTrove"
 )
 
@@ -37,10 +37,10 @@ def enhancingImg(filename):
     print(f"Image Enhancing for {filename}")
     OrginalImg = Image.open(f"Uploads/{filename}")
     EnhancedImg = ImageEnhance.Color(OrginalImg).enhance(1.5)
-    EnhancedImg = ImageEnhance.Contrast(OrginalImg).enhance(1.5)
-    EnhancedImg = ImageEnhance.Sharpness(OrginalImg).enhance(1.5)
+    EnhancedImg = ImageEnhance.Contrast(EnhancedImg).enhance(1.5)
+    EnhancedImg = ImageEnhance.Sharpness(EnhancedImg).enhance(1.5)
     newfilename = f"Static/{filename}"
-    EnhancedImg.save(newfilename, "JPEG", optimize=True)
+    EnhancedImg.save(newfilename, optimize=True)
     #cv2.imwrite(newfilename, EnhancedImg)
     sql_statement = "INSERT INTO OPERATIONS (CDATE, CTIME, INPUT_IMG, OUTPUT_IMG, operation_type) VALUES (CURDATE(), NOW(), %s, %s, %s);"
     my_cursor.execute(sql_statement, (input_img, output_img, operation_type))
