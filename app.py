@@ -20,7 +20,7 @@ app.config['SECRET_KEY'] = "something complex"
 mydb = mysql.connector.connect(
     host = "localhost",
     user = "root",
-    passwd = "sivaganga",
+    passwd = "qazwsx",
     database = "ToolTrove"
 )
 
