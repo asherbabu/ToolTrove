@@ -94,7 +94,7 @@ body{
 }
 
 /* Adjusted selector to target the entire dropdown */
-.dropdown:hover .dropdowncontent {
+.dropdown:hover .dropdow    ncontent {
     display: block;
 }
 

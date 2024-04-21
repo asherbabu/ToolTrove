@@ -6,6 +6,7 @@ import cv2
 import img2pdf
 from PIL import Image, ImageEnhance
 import mysql.connector
+import qrcode
 
 UPLOAD_FOLDER = 'Uploads'
 
@@ -29,6 +30,18 @@ my_cursor = mydb.cursor()
 def allowed_file(filename):
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+def qrcodeimg(link):
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_L,
+        box_size=10,
+        border=4
+    )
+    qr.add_data(link)
+    qr.make(fit=True)
+    img = qr.make_image(fill_color="magenta", back_color="white")
+    img.show()
 
 def enhancingImg(filename):
     input_img = f"Uploads/{filename}"
@@ -248,6 +261,29 @@ def imageEnhancerfunc():
 
 @app.route('/imgToGrayscalefunc', methods=["GET", "POST"])
 def imgToGrayscalefunc():
+    if request.method == "POST":
+        operation = request.form.get("operation")
+        #return "POST REQUEST IS HERE"
+    # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return render_template("error.html")
+        file = request.files['file']
+        # if user does not select file, browser also
+        # submit an empty part without filename
+        if file.filename == '':
+            flash('No selected file')
+            return "error no seleceted file"
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            new = grayScale(filename)
+            flash(f"your image has been processed and is available <a href='/{new}' target='_blank'>HERE</a>")
+            return render_template("imgToGrayscale.html")
+    return render_template("imgToGrayscale.html")
+
+@app.route('/qrcodeimgfunc', methods=["GET", "POST"])
+def qrcodeimgfunc():
     if request.method == "POST":
         operation = request.form.get("operation")
         #return "POST REQUEST IS HERE"
