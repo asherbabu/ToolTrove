@@ -1,21 +1,40 @@
 header{
-    background-color: #ffff;
+    background-color: #021024;
     position: fixed;
     top: 0;
     right: 0;
+    height: 100px;;
     left: 0;
 }
 
 body{
+    font-family: "Trirong", serif;
     position: fixed;
     top: 100px;
+    background-color: #b92222;
+    overflow:visible;
+    font-size: medium;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 100px 200px;
+    z-index: -1;;
 }
 
+.nav a {
+    color: #f8f8f8;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-family: "Trirong", serif;
+}
 .menu{
     /*padding-left: 200px;*/
     position: fixed;
     top: 22px;
     left: 200px;
+    font-family: "Trirong", serif;
 }
 
 .logo{
@@ -31,71 +50,104 @@ body{
 
 .buttons button:hover{
     background-color: #ffff;
-    color: #800080;
+    color: #ffffff;
+}
+
+.signup{
+    position: fixed;
+    background-color:#fac344;
+    color:black;
+    right: 90px;
+    width: 120;
+    font-family: "Trirong", serif;
+    top: 30px;
+    height: 40px;
+    font-size: medium;
+    cursor: pointer;
+    border-style:groove;
+    border-radius: 2px;
+    border-color: #ffffff;
+    transition: background-color 2s ease;
 }
 
 .login{
     position: fixed;
-    right: 140px;
-    background-color: #800080;
-    color: #ffff;
-    font-weight: bold;
+    right: 200px;
+    background-color:#fac344;
+    color: black;
+    font-style: inherit;
     cursor: pointer;
-    border-radius: 4px;
-    border-color: #800080;
+    font-size: medium;
+    top:30px;
+    width: 100px;
+    height: 40px;
+    font-family: "Trirong", serif;
+    border-style: groove ;
+    border-radius: 2px;
+    border-color: #ffffff;
+    transition: background-color 2s ease;
 }
 
-.signup{
-    background-color: #800080;
-    color: #ffff;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 4px;
-    border-color: #800080;
-}
 
 .home{
     text-decoration: none;
+    position: fixed;
     padding-right: 80px;
+    top: 30px;
+    font-size: large;
+    align-self: auto;
+    color: #ffff;
+    padding: 10px 20px;
+    border-radius: 20px;
+    transition: background-color 2s ease;
+    
 }
 
 .categories {
     position: fixed;
-    top: 22px;
-    left: 300px;
+    top: 40px;
+    left: 500px;
     text-decoration: none;
+    font-size: large;
     border: none;
     outline: none;
-    color: #800080;
+    align-self: auto;
+    color: #fbfbfb;
     background-color: inherit;
     font-family: inherit;
-    margin: 0;
     cursor: pointer;
 }
 
 .dropdowncontent {
     display: none;
-    position: absolute;
-    background-color: #f0f0f0;
+    position: relative;
+    background-color: #ffffff;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
 
 .dropdowncontent a {
-    color: #800080;
+    color: #000000;
     padding: 12px 16px;
     text-decoration: none;
-    display: block;
+    display:inline-block;
+    right: 0;
+    left: 0;
 }
 
 .dropdowncontent a:hover {
-    background-color: #ddd;
+    background-color:#fac344;
 }
 
 /* Adjusted selector to target the entire dropdown */
+<<<<<<< HEAD
 .dropdown:hover .dropdow    ncontent {
     display: block;
+=======
+.dropdown:hover .dropdowncontent {
+    display: inline-block;
+>>>>>>> f2a221c5da589f6dfcb14b174a804503aad145e4
 }
 
 .dropdown::after {
@@ -108,12 +160,16 @@ body{
 .about{
     text-decoration: none;
     position: fixed;
-    top: 22px;
-    left: 400px;
+    top: 40px;
+    align-self: auto;
+    font-size: large;
+    left: 350px;
+    font-size: ;
+    color: #ffff;
 }
 
-.card {
-    border: 2px solid #800080;
+.card { 
+    border: 2px solid #021024; ;
     padding: 15px;
     border-radius: 5px;
     margin: 10px;
@@ -121,7 +177,7 @@ body{
 }
 
 .container :hover{
-    background-color: #800080;
+    background-color:#021024;;
     color: #ffff;
     border: none;
 }
@@ -129,7 +185,7 @@ body{
 
 .container a{
     text-decoration: none;
-    color: #800080;
+    color:#021024;
 }
 
 .container1 {
@@ -226,12 +282,26 @@ body{
 
 .search{
     position: fixed;
-    left: 600px;
-    top: 22px;
-    width: 900px;
-    height: 15px;
-    border: 2px solid #800080;
-    border-radius: 5px;
+    right: 400px;
+    top: 20px;
+    text-align: center;
+    width: 800px;
+    height: 50px;
+    border: 2px solid #ffffff;
+    font-size: large;
+    font-family: "Trirong", serif;
+    border-radius: 4px;
+    transition: background-color 2s ease;
+}
+
+.alert{
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid transparent;
+    background-color: #05e805;
+    border-radius: 4px;
+    position: absolute;
+    top: 100px;
 }
 
 
