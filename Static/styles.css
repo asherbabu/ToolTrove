@@ -141,13 +141,13 @@ body{
 }
 
 /* Adjusted selector to target the entire dropdown */
-<<<<<<< HEAD
+
 .dropdown:hover .dropdow    ncontent {
     display: block;
-=======
-.dropdown:hover .dropdowncontent {
+}
+
+.dropdown:hover .dropdowncontent {      
     display: inline-block;
->>>>>>> f2a221c5da589f6dfcb14b174a804503aad145e4
 }
 
 .dropdown::after {
