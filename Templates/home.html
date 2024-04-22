@@ -1,115 +1,254 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ToolTrove</title>
-    <link rel="stylesheet" href="/Static/styles.css">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/Static/styles.css" />
     <script src="script.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Trirong">
-</head>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Trirong"
+    />
+  </head>
 
-<body style="background-color: #f1ebeb;">
-    <nav class="navbar">
+  <body>
+    <header>
+      <nav class="navbar">
         <div class="logo">
-            <a href="/"><img src="/Static/ToolTrove_Logo.png" alt="ToolTrove" width="60px"></a>
+          <a href="/"
+            ><img src="/Static/ToolTrove_Logo.png" alt="ToolTrove" width="60px"
+          /></a>
+        </div>
+        <div class="navlinks">
+          <ul>
+            <a href="">Home</a>
+          </ul>
+          <ul>
+            <a href="">Categories</a>
+          </ul>
+          <ul>
+            <a href="">About Us</a>
+          </ul>
         </div>
         <div class="searchbar">
-            <input class="search" type="text" placeholder="Search for a tool">
+          <input class="search" type="text" placeholder="Search for a tool" />
         </div>
 
         <div class="buttons">
-            <a href="/login" class="btn">Login</a>
-            <a href="/signup" class="btn">Sign Up</a>
+          <a href="/Donate" class="btn">Donate</a>
         </div>
-    </nav>
-    <div class="all-container">
-        <div class="card">
-            <div class="content">
-                <p class="heading">Card Hover Effect
-                </p>
-                <p class="para">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi
-                    laboriosam at voluptas minus culpa deserunt delectus sapiente
-                    inventore pariatur
-                </p>
-                <button class="btn">Read more</button>
-            </div>
-        </div>
-        <div class="card">
-            <div class="content">
-                <p class="heading">Card Hover Effect
-                </p>
-                <p class="para">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi
-                    laboriosam at voluptas minus culpa deserunt delectus sapiente
-                    inventore pariatur
-                </p>
-                <button class="btn">Read more</button>
-            </div>
-        </div>
-        <div class="card">
-            <div class="content">
-                <p class="heading">Card Hover Effect
-                </p>
-                <p class="para">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi
-                    laboriosam at voluptas minus culpa deserunt delectus sapiente
-                    inventore pariatur
-                </p>
-                <button class="btn">Read more</button>
-            </div>
-        </div>
-        <div class="card">
-            <div class="content">
-                <p class="heading">Card Hover Effect
-                </p>
-                <p class="para">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi
-                    laboriosam at voluptas minus culpa deserunt delectus sapiente
-                    inventore pariatur
-                </p>
-                <button class="btn">Read more</button>
-            </div>
-        </div>
-        <div class="card">
-            <div class="content">
-                <p class="heading">Card Hover Effect
-                </p>
-                <p class="para">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi
-                    laboriosam at voluptas minus culpa deserunt delectus sapiente
-                    inventore pariatur
-                </p>
-                <button class="btn">Read more</button>
-            </div>
-        </div>
-        <div class="card">
-            <div class="content">
-                <p class="heading">Card Hover Effect
-                </p>
-                <p class="para">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi
-                    laboriosam at voluptas minus culpa deserunt delectus sapiente
-                    inventore pariatur
-                </p>
-                <button class="btn">Read more</button>
-            </div>
-        </div>
-        <div class="card">
-            <div class="content">
-                <p class="heading">Card Hover Effect
-                </p>
-                <p class="para">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi
-                    laboriosam at voluptas minus culpa deserunt delectus sapiente
-                    inventore pariatur
-                </p>
-                <button class="btn">Read more</button>
-            </div>
-        </div>
-    </div>
-</body>
+      </nav>
+    </header>
 
+    <div class="homeHeading">
+      <h1>All the tools you need, in one place</h1>
+    </div>
+
+    <div class="all-container">
+      <div class="card">
+        <a href="/imageconverter">
+          <div class="content">
+            <img src="/Static/converter.png" alt="Image Converter" />
+            <p class="heading">Image Converter</p>
+            <p class="para">
+              Effortlessly convert images to PNG, JPG, WebP, or PDF formats with
+              our versatile Image Converter Tool.
+            </p>
+            <button class="btn">Use Tool</button>
+          </div>
+        </a>
+      </div>
+
+      <div class="card">
+        <a href="/imageEnhancer">
+          <div class="content">
+            <img src="/Static/enhancer.png" alt="Image Enhancer" />
+            <p class="heading">Image Enhancer</p>
+            <p class="para">
+              Transform your images with our Image Enhancer tool, elevating
+              clarity, color, and quality for stunning results.
+            </p>
+            <button class="btn">Use Tool</button>
+          </div>
+        </a>
+      </div>
+
+      <div class="card">
+        <a href="/imgToGrayscale">
+          <div class="content">
+            <img src="/Static/grayscale.png" alt="Image to Grayscale" />
+            <p class="heading">Image to Grayscale</p>
+            <p class="para">
+              Effortlessly convert images to grayscale, ensuring clarity and
+              simplicity for stunning results.
+            </p>
+            <button class="btn">Use Tool</button>
+          </div>
+        </a>
+      </div>
+
+      <div class="card">
+        <a href="/qrCodeGenerator">
+          <div class="content">
+            <img src="/Static/qrcode.png" alt="QR Code Generator" />
+            <p class="heading">QR Code Generator</p>
+            <p class="para">
+              Create QR codes effortlessly with our QR Code Generator tool,
+              streamlining integration and sharing processes.
+            </p>
+            <button class="btn">Use Tool</button>
+          </div>
+        </a>
+      </div>
+
+      <div class="card">
+        <a href="/urlShortner">
+          <div class="content">
+            <img src="/Static/url.png" alt="URL Shortner" />
+            <p class="heading">URL Shortner</p>
+            <p class="para">
+              Shorten URLs quickly with our URL Shortener tool, streamlining
+              sharing and tracking for enhanced efficiency.
+            </p>
+            <button class="btn">Use Tool</button>
+          </div>
+        </a>
+      </div>
+
+      <div class="card">
+        <div class="content">
+          <img src="/Static/summarizer.png" alt="Text Summarizer" />
+          <p class="heading">Text Summarizer</p>
+          <p class="para">
+            Summarize text efficiently with our Text Summarizer tool, condensing
+            content for quick understanding and analysis.
+          </p>
+          <button class="btn">Use Tool</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="content">
+          <img src="/Static/compressor.png" alt="Image Compressor" />
+          <p class="heading">Image Compressor</p>
+          <p class="para">
+            Compress images easily with our Image Compressor tool, reducing file
+            size without compromising quality for efficient sharing.
+          </p>
+          <button class="btn">Use Tool</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="content">
+          <img src="/Static/handwriting.png" alt="Text-to-Handwriting" />
+          <p class="heading">Text to Handwriting</p>
+          <p class="para">
+            Transform text into handwritten notes with our Text to Handwriting
+            tool, adding a personal touch to digital communication.
+          </p>
+          <button class="btn">Use Tool</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="content">
+          <img src="/Static/audioconverter.png" alt="Audio Converter" />
+          <p class="heading">Audio Converter</p>
+          <p class="para">
+            Convert audio files effortlessly with our Audio Converter tool,
+            ensuring compatibility and seamless playback across platforms.
+          </p>
+          <button class="btn">Use Tool</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="content">
+          <img src="/Static/texttospeech.png" alt="Text-to-Speech" />
+          <p class="heading">Text to Speech</p>
+          <p class="para">
+            Convert text to speech with our Text to Speech tool, delivering
+            clear and natural audio output for seamless communication.
+          </p>
+          <button class="btn">Use Tool</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="content">
+          <p class="heading">Image Compressor 4</p>
+          <p class="para">
+            Compress images easily with our Image Compressor tool, reducing file
+            size without compromising quality for efficient sharing.
+          </p>
+          <button class="btn">Use Tool</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="content">
+          <p class="heading">Image Compressor 5</p>
+          <p class="para">
+            Compress images easily with our Image Compressor tool, reducing file
+            size without compromising quality for efficient sharing.
+          </p>
+          <button class="btn">Use Tool</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="content">
+          <p class="heading">Image Compressor 6</p>
+          <p class="para">
+            Compress images easily with our Image Compressor tool, reducing file
+            size without compromising quality for efficient sharing.
+          </p>
+          <button class="btn">Use Tool</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="content">
+          <p class="heading">Image Compressor 7</p>
+          <p class="para">
+            Compress images easily with our Image Compressor tool, reducing file
+            size without compromising quality for efficient sharing.
+          </p>
+          <button class="btn">Use Tool</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="content">
+          <p class="heading">Image Compressor 8</p>
+          <p class="para">
+            Compress images easily with our Image Compressor tool, reducing file
+            size without compromising quality for efficient sharing.
+          </p>
+          <button class="btn">Use Tool</button>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+  </body>
 </html>

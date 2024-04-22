@@ -42,8 +42,17 @@ def qrcodeimg(link):
     )
     qr.add_data(link)
     qr.make(fit=True)
+    img_buffer = io.BytesIO()
     img = qr.make_image(fill_color="magenta", back_color="white")
-    img.show()
+    img_data = img_buffer.getvalue()
+    filename = f"qrcode_{int(time.time())}.png"  # Generate unique filename
+    save_path = os.path.join(app.config['STATIC_FOLDER'], filename)
+    #filename = "qrcode"
+    newfilename = f"Static/{link}"
+    #img.save(newfilename, optimize=True)
+    #cv2.imwrite(newfilename, img)
+    return newfilename
+    #img.show()
 
 
 def enhancingImg(filename):
@@ -308,35 +317,32 @@ def imgToGrayscalefunc():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             new = grayScale(filename)
-            flash(
-                f"your image has been processed and is available <a href='/{new}' target='_blank'>HERE</a>")
+            flash(f"your image has been processed and is available <a href='/{new}' target='_blank'>HERE</a>")
             return render_template("imgToGrayscale.html")
     return render_template("imgToGrayscale.html")
 
 
-@app.route('/qrcodeimgfunc', methods=["GET", "POST"])
+@app.route('/qrCodeImgfunc', methods=["GET", "POST"])
 def qrcodeimgfunc():
-    if request.method == "POST":
-        operation = request.form.get("operation")
-        # return "POST REQUEST IS HERE"
-    # check if the post request has the file part
-        if 'file' not in request.files:
-            flash('No file part')
-            return render_template("error.html")
-        file = request.files['file']
-        # if user does not select file, browser also
-        # submit an empty part without filename
-        if file.filename == '':
-            flash('No selected file')
-            return "error no seleceted file"
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            new = grayScale(filename)
-            flash(
-                f"your image has been processed and is available <a href='/{new}' target='_blank'>HERE</a>")
-            return render_template("imgToGrayscale.html")
-    return render_template("imgToGrayscale.html")
+  if request.method == "POST":
+    link = request.form.get("text")
+    if not link:
+      flash("Please enter a link to generate a QR code.")
+      return render_template("qrCodeGenerator.html")
+
+    saved_filename = qrcodeimg(link)
+    if saved_filename:
+      # Save the link as text in the uploads folder (replace with your logic)
+      with open(os.path.join(app.config['UPLOAD_FOLDER'], f"{link}.txt"), 'w') as f:
+          f.write(link)  # Example: Simply write the link to the text file
+
+      flash(f"QR code generated and saved as {saved_filename}! Link saved in uploads folder.")
+    else:
+      flash("An error occurred while generating the QR code.")
+
+    return render_template("qrCodeGenerator.html")
+
+  return render_template("qrCodeGenerator.html")
 
 
 if __name__ == '__main__':
