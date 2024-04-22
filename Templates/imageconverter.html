@@ -1,43 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ToolTrove</title>
-    <link rel="stylesheet" href="/Static/styles.css" />
-  </head>
-  <header>
-    
 
-    {% with messages = get_flashed_messages(with_categories=True) %} {% if
-    messages %}
-    <ul class="flashes">
-      {% for category, message in messages %}
-      <ul class="alert alert-{{ category }}">{{ message | safe}}</ul>
-      {% endfor %}
-    </ul>
-    {% endif %} {% endwith %}
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ToolTrove</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
 
+<body class="bg-gray-100">
+  <header class="py-4 bg-white">
+    <div class="container mx-auto">
+      {% with messages = get_flashed_messages(with_categories=True) %} {% if messages %}
+      <ul class="flashes">
+        {% for category, message in messages %}
+        <li class="alert alert-{{ category }}">{{ message | safe}}</li>
+        {% endfor %}
+      </ul>
+      {% endif %} {% endwith %}
+    </div>
   </header>
-  <body style="background-color: #f1ebeb">
-    <h1>Image Convertor</h1>
-    <form action="/imageconverterfunc" method="post" enctype="multipart/form-data">
-      <div class="fileinput">
-        <label for="myfile">Select a file</label>
-        <input type="file" id="myfile" name="file" />
+
+  <div class="container mx-auto py-8">
+    <h1 class="text-3xl font-bold text-center mb-8">Image Converter</h1>
+    <form action="/imageconverterfunc" method="post" enctype="multipart/form-data" class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg">
+      <div class="mb-4">
+        <label for="myfile" class="block text-gray-700 font-bold mb-2">Select a file</label>
+        <input type="file" id="myfile" name="file" class="w-full border border-gray-300 py-2 px-3 rounded-md">
       </div>
-      <div class="slect">
-        <select name="operation" id="floatingselect">
-          <option selected>Choose</option>
-          <!-- <option value="cgray">Convert tp grayscale</option> -->
+      <div class="mb-4">
+        <label for="floatingselect" class="block text-gray-700 font-bold mb-2">Select the preferred editing operation</label>
+        <select name="operation" id="floatingselect" class="w-full border border-gray-300 py-2 px-3 rounded-md">
+          <option selected disabled>Choose</option>
+          <!-- <option value="cgray">Convert to grayscale</option> -->
           <option value="cpng">Convert to PNG</option>
-          <option value="cwebp">Convert to webp</option>
-          <option value="cjpg">Covert to jpg</option>
-          <option value="cpdf">Convert to pdf</option>
+          <option value="cwebp">Convert to WebP</option>
+          <option value="cjpg">Convert to JPG</option>
+          <option value="cpdf">Convert to PDF</option>
         </select>
-        <label for="Floatingselect">select the prefer editing operation</label>
       </div>
-      <button type="submit" class="submitbt">Submit</button>
+      <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md">Submit</button>
     </form>
-  </body>
+  </div>
+
+</body>
+
 </html>
