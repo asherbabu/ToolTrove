@@ -5,8 +5,9 @@ from werkzeug.utils import secure_filename
 import cv2
 import img2pdf
 from PIL import Image, ImageEnhance
-# import mysql.connector
+import mysql.connector
 import qrcode
+import time
 
 UPLOAD_FOLDER = 'Uploads'
 
@@ -18,14 +19,14 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['SECRET_KEY'] = "something complex"
 # db = SQLAlchemy(app)
 
-# mydb = mysql.connector.connect(
-#    host = "localhost",
-#    user = "root",
-#    passwd = "tiger",
-#    database = "ToolTrove"
-# )
+mydb = mysql.connector.connect(
+    host = "localhost",
+    user = "root",
+    passwd = "tiger",
+    database = "ToolTrove"
+ )
 
-# my_cursor = mydb.cursor()
+my_cursor = mydb.cursor()
 
 
 def allowed_file(filename):
@@ -34,6 +35,9 @@ def allowed_file(filename):
 
 
 def qrcodeimg(link):
+    operation_type = "QR Code Generator"
+    input = {link}
+    
     qr = qrcode.QRCode(
         version=1,
         error_correction=qrcode.constants.ERROR_CORRECT_L,
@@ -42,23 +46,23 @@ def qrcodeimg(link):
     )
     qr.add_data(link)
     qr.make(fit=True)
-    img_buffer = io.BytesIO()
     img = qr.make_image(fill_color="magenta", back_color="white")
-    img_data = img_buffer.getvalue()
+
     filename = f"qrcode_{int(time.time())}.png"  # Generate unique filename
-    save_path = os.path.join(app.config['STATIC_FOLDER'], filename)
-    #filename = "qrcode"
-    newfilename = f"Static/{link}"
-    #img.save(newfilename, optimize=True)
-    #cv2.imwrite(newfilename, img)
-    return newfilename
-    #img.show()
+    save_path = os.path.join("uploads", filename)  # Example: Save in uploads folder
+    img.save(save_path)
+
+  # Database operation (store image path)
+    sql_statement = "INSERT INTO OPERATIONS (CDATE, CTIME, INPUT, OUTPUT_IMG, operation_type) VALUES (CURDATE(), NOW(), %s, %s, %s);"
+    my_cursor.execute(sql_statement, (link, filename, operation_type))
+    mydb.commit()
+    img.show()
 
 
 def enhancingImg(filename):
-    # input_img = f"Uploads/{filename}"
-    # output_img = f"Static/{filename}"
-    # operation_type = "ImageEnhance"
+    input_img = f"Uploads/{filename}"
+    output_img = f"Static/{filename}"
+    operation_type = "ImageEnhance"
     print(f"Image Enhancing for {filename}")
     OrginalImg = Image.open(f"Uploads/{filename}")
     EnhancedImg = ImageEnhance.Color(OrginalImg).enhance(1.5)
@@ -67,8 +71,9 @@ def enhancingImg(filename):
     newfilename = f"Static/{filename}"
     EnhancedImg.save(newfilename, optimize=True)
     # cv2.imwrite(newfilename, EnhancedImg)
-   # sql_statement = "INSERT INTO OPERATIONS (CDATE, CTIME, INPUT_IMG, OUTPUT_IMG, operation_type) VALUES (CURDATE(), NOW(), %s, %s, %s);"
-    # my_cursor.execute(sql_statement, (input_img, output_img, operation_type))
+    sql_statement = "INSERT INTO OPERATIONS (CDATE, CTIME, INPUT_IMG, OUTPUT_IMG, operation_type) VALUES (CURDATE(), NOW(), %s, %s, %s);"
+    my_cursor.execute(sql_statement, (input_img, output_img, operation_type))
+    mydb.commit()
     return newfilename
 
 
@@ -81,9 +86,9 @@ def grayScale(filename):
     imgProcessed = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     newFilename = f"Static/{filename}"
     cv2.imwrite(newFilename, imgProcessed)
-    # sql_statement = "INSERT INTO OPERATIONS (CDATE, CTIME, INPUT_IMG, OUTPUT_IMG, operation_type) VALUES (CURDATE(), NOW(), %s, %s, %s);"
-    # my_cursor.execute(sql_statement, (input_img, output_img, operation_type))
-    # mydb.commit()
+    sql_statement = "INSERT INTO OPERATIONS (CDATE, CTIME, INPUT_IMG, OUTPUT_IMG, operation_type) VALUES (CURDATE(), NOW(), %s, %s, %s);"
+    my_cursor.execute(sql_statement, (input_img, output_img, operation_type))
+    mydb.commit()
     return newFilename
 
 
@@ -111,25 +116,25 @@ def processImage(filename, operation):
             operation_type = "Convert to WEBP"
             newfilename = f"Static/{filename.split('.')[0]}.webp"
             cv2.imwrite(newfilename, img)
-            # sql_statement = "INSERT INTO OPERATIONS (CDATE, CTIME, INPUT_IMG, OUTPUT_IMG, operation_type) VALUES (CURDATE(), NOW(), %s, %s, %s);"
-            # my_cursor.execute(sql_statement, (input_img, output_img, operation_type))
-            # mydb.commit()
+            sql_statement = "INSERT INTO OPERATIONS (CDATE, CTIME, INPUT_IMG, OUTPUT_IMG, operation_type) VALUES (CURDATE(), NOW(), %s, %s, %s);"
+            my_cursor.execute(sql_statement, (input_img, output_img, operation_type))
+            mydb.commit()
             return newfilename
         case "cjpg":
             operation_type = "Convert to JPG"
             newfilename = f"Static/{filename.split('.')[0]}.jpg"
             cv2.imwrite(newfilename, img)
-            # sql_statement = "INSERT INTO OPERATIONS (CDATE, CTIME, INPUT_IMG, OUTPUT_IMG, operation_type) VALUES (CURDATE(), NOW(), %s, %s, %s);"
-            # my_cursor.execute(sql_statement, (input_img, output_img, operation_type))
-            # mydb.commit()
+            sql_statement = "INSERT INTO OPERATIONS (CDATE, CTIME, INPUT_IMG, OUTPUT_IMG, operation_type) VALUES (CURDATE(), NOW(), %s, %s, %s);"
+            my_cursor.execute(sql_statement, (input_img, output_img, operation_type))
+            mydb.commit()
             return newfilename
         case "cpng":
             operation_type = "Convert to PNG"
             newfilename = f"Static/{filename.split('.')[0]}.png"
             cv2.imwrite(newfilename, img)
-            # sql_statement = "INSERT INTO OPERATIONS (CDATE, CTIME, INPUT_IMG, OUTPUT_IMG, operation_type) VALUES (CURDATE(), NOW(), %s, %s, %s);"
-            # my_cursor.execute(sql_statement, (input_img, output_img, operation_type))
-            # mydb.commit()
+            sql_statement = "INSERT INTO OPERATIONS (CDATE, CTIME, INPUT_IMG, OUTPUT_IMG, operation_type) VALUES (CURDATE(), NOW(), %s, %s, %s);"
+            my_cursor.execute(sql_statement, (input_img, output_img, operation_type))
+            mydb.commit()
             return newfilename
         case "cpdf":
             operation_type = "Convert to PDF"
@@ -141,9 +146,9 @@ def processImage(filename, operation):
             file.write(pdf_bytes)
             image.close()
             file.close()
-            # sql_statement = "INSERT INTO OPERATIONS (CDATE, CTIME, INPUT_IMG, OUTPUT_IMG, operation_type) VALUES (CURDATE(), NOW(), %s, %s, %s);"
-            # my_cursor.execute(sql_statement, (input_img, output_img, operation_type))
-            # mydb.commit()
+            sql_statement = "INSERT INTO OPERATIONS (CDATE, CTIME, INPUT_IMG, OUTPUT_IMG, operation_type) VALUES (CURDATE(), NOW(), %s, %s, %s);"
+            my_cursor.execute(sql_statement, (input_img, output_img, operation_type))
+            mydb.commit()
             return newfilename
     pass
 
@@ -324,25 +329,26 @@ def imgToGrayscalefunc():
 
 @app.route('/qrCodeImgfunc', methods=["GET", "POST"])
 def qrcodeimgfunc():
-  if request.method == "POST":
-    link = request.form.get("text")
-    if not link:
-      flash("Please enter a link to generate a QR code.")
-      return render_template("qrCodeGenerator.html")
-
-    saved_filename = qrcodeimg(link)
-    if saved_filename:
-      # Save the link as text in the uploads folder (replace with your logic)
-      with open(os.path.join(app.config['UPLOAD_FOLDER'], f"{link}.txt"), 'w') as f:
-          f.write(link)  # Example: Simply write the link to the text file
-
-      flash(f"QR code generated and saved as {saved_filename}! Link saved in uploads folder.")
-    else:
-      flash("An error occurred while generating the QR code.")
-
+    if request.method == "POST":
+        link = request.form.get("qrlink")
+        # return "POST REQUEST IS HERE"
+    # check if the post request has the file part
+        #if 'file' not in request.files:
+         #   flash('No file part')
+          #  return render_template("error.html")
+        #file = request.files['file']
+        # if user does not select file, browser also
+        # submit an empty part without filename
+        #if file.filename == '':
+         #   flash('No selected file')
+          #  return "error no seleceted file"
+        #if file and allowed_file(file.filename):
+         #   filename = secure_filename(file.filename)
+          #  file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        qrcodeimg(link)
+        #flash(f"your image has been processed and is available <a href='/{new}' target='_blank'>HERE</a>")
+        return render_template("qrCodeGenerator.html")
     return render_template("qrCodeGenerator.html")
-
-  return render_template("qrCodeGenerator.html")
 
 
 if __name__ == '__main__':
