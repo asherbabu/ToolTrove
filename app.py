@@ -53,27 +53,27 @@ def qrcodeimg(link):
     img.save(save_path)
 
   # Database operation (store image path)
-    sql_statement = "INSERT INTO OPERATIONS (CDATE, CTIME, INPUT, OUTPUT_IMG, operation_type) VALUES (CURDATE(), NOW(), %s, %s, %s);"
-    my_cursor.execute(sql_statement, (link, filename, operation_type))
-    mydb.commit()
+    #sql_statement = "INSERT INTO OPERATIONS (CDATE, CTIME, INPUT, OUTPUT_IMG, operation_type) VALUES (CURDATE(), NOW(), %s, %s, %s);"
+    #my_cursor.execute(sql_statement, (link, filename, operation_type))
+    #mydb.commit()
     img.show()
 
 
 def enhancingImg(filename):
-    input_img = f"Uploads/{filename}"
-    output_img = f"Static/{filename}"
-    operation_type = "ImageEnhance"
+    #input_img = f"Uploads/{filename}"
+    #output_img = f"Static/{filename}"
+    #operation_type = "ImageEnhance"
     print(f"Image Enhancing for {filename}")
     OrginalImg = Image.open(f"Uploads/{filename}")
     EnhancedImg = ImageEnhance.Color(OrginalImg).enhance(1.5)
     EnhancedImg = ImageEnhance.Contrast(EnhancedImg).enhance(1.5)
     EnhancedImg = ImageEnhance.Sharpness(EnhancedImg).enhance(1.5)
-    newfilename = f"Static/{filename}"
+    newfilename = f"Static/Output/{filename}"
     EnhancedImg.save(newfilename, optimize=True)
     # cv2.imwrite(newfilename, EnhancedImg)
-    sql_statement = "INSERT INTO OPERATIONS (CDATE, CTIME, INPUT_IMG, OUTPUT_IMG, operation_type) VALUES (CURDATE(), NOW(), %s, %s, %s);"
-    my_cursor.execute(sql_statement, (input_img, output_img, operation_type))
-    mydb.commit()
+    #sql_statement = "INSERT INTO OPERATIONS (CDATE, CTIME, INPUT_IMG, OUTPUT_IMG, operation_type) VALUES (CURDATE(), NOW(), %s, %s, %s);"
+    #my_cursor.execute(sql_statement, (input_img, output_img, operation_type))
+    #mydb.commit()
     return newfilename
 
 
