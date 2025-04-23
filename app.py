@@ -60,9 +60,9 @@ def qrcodeimg(link):
 
 
 def enhancingImg(filename):
-    #input_img = f"Uploads/{filename}"
-    #output_img = f"Static/{filename}"
-    #operation_type = "ImageEnhance"
+    input_img = f"Uploads/{filename}"
+    output_img = f"Static/{filename}"
+    operation_type = "ImageEnhance"
     print(f"Image Enhancing for {filename}")
     OrginalImg = Image.open(f"Uploads/{filename}")
     EnhancedImg = ImageEnhance.Color(OrginalImg).enhance(1.5)
@@ -71,9 +71,9 @@ def enhancingImg(filename):
     newfilename = f"Static/Output/{filename}"
     EnhancedImg.save(newfilename, optimize=True)
     # cv2.imwrite(newfilename, EnhancedImg)
-    #sql_statement = "INSERT INTO OPERATIONS (CDATE, CTIME, INPUT_IMG, OUTPUT_IMG, operation_type) VALUES (CURDATE(), NOW(), %s, %s, %s);"
-    #my_cursor.execute(sql_statement, (input_img, output_img, operation_type))
-    #mydb.commit()
+    sql_statement = "INSERT INTO OPERATIONS (CDATE, CTIME, INPUT_IMG, OUTPUT_IMG, operation_type) VALUES (CURDATE(), NOW(), %s, %s, %s);"
+    my_cursor.execute(sql_statement, (input_img, output_img, operation_type))
+    mydb.commit()
     return newfilename
 
 
